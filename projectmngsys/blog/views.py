@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import *
 
 # Create your views here.
 def index(request):
@@ -19,3 +20,18 @@ def contactus(request):
         'name':'Django',
         'email':'django@gmail.com'
     })
+
+def getAllData(request):
+    
+    #select name from student
+    #django orm lookups
+    #students =Student.objects.all().val  ues()
+    #students = Student.objects.filter(age__gte=25).values()
+    #students = Student.objects.filter(age__lte=25).values()
+    students = Student.objects.filter(name__startswith='a').values()
+    
+    
+    
+    print(students)
+    
+    return render(request,'blog/getalldata.html',{'students':students})    

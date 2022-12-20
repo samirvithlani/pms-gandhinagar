@@ -6,4 +6,5 @@ urlpatterns = [
     path('index/',views.index),
     path('aboutus/',views.aboutus),
     path('contactus/',views.contactus),
+    path('get',views.getAllData)
 ]

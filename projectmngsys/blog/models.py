@@ -14,4 +14,72 @@ class Student(models.Model):
     
     class Meta:
         db_table = 'student'
-         
+
+class Account(models.Model):
+    name = models.CharField(max_length=100)
+    type = models.CharField(max_length=100)
+    no = models.CharField(max_length=100)
+    
+    class Meta:
+        db_table = 'account'    
+    
+    def __str__(self):
+        return self.name        
+             
+
+class User(Account):
+    uname = models.CharField(max_length=100)
+    email = models.EmailField()
+    age = models.IntegerField()         
+    
+    
+    class Meta:
+        db_table = 'user'
+        
+    def __str__(self):
+        return self.name        
+    
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    
+    class Meta:
+        db_table = 'author'
+        
+    def __str__(self):
+        return self.name
+    
+
+class Books(models.Model):
+    author  = models.ForeignKey(Author,on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    price = models.IntegerField()
+    
+    class Meta:
+        db_table = 'books'
+        
+    def __str__(self):
+        return self.name                
+    
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.IntegerField()
+    qty = models.IntegerField()
+    description = models.TextField()
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        db_table = 'product'
+
+class Cart(models.Model):
+    product = models.ManyToManyField(Product)
+    total = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'cart'
+        
+        
