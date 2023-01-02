@@ -91,6 +91,12 @@ def deleteRecord(request):
     deleted = student.delete()
     print(deleted)
     print("student deleted...")
+    return render(request,'blog/createorm.html')
+
+def updateRecord(request):
     
-    
+    student = Student.objects.get(id=2)
+    student.name = "akhsit"
+    #student.age = 35
+    student.save()
     return render(request,'blog/createorm.html')

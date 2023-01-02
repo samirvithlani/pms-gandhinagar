@@ -10,5 +10,6 @@ urlpatterns = [
     path('ques/',views.que_ans_vote),
     path('create/',views.creatOrm),
     path('delete/',views.deleteRecord),
+    path('update/',views.updateRecord),
     
 ]
