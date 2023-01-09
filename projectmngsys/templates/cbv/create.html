@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static '/style.css' %}" />
+  </head>
+  <body>
+   
+    {% comment %} <form method="POST">
+      {% csrf_token %} {{form.as_p}}
+      <input type="submit" value="Submit" />
+    </form> {% endcomment %}
+    <form method = "POST" class = "form">
+        {{form.title}}
+        {% csrf_token %}
+        <div class="title">Welcome</div>
+        <div class="subtitle">Let's create your account!</div>
+
+        <div class="input-container ic1">
+            {{form}}
+          <div class="cut"></div>
+          
+        </div>
+
+        <div class="input-container ic2">
+          <input id="lastname" class="input" placeholder=" "{{form.body}} />
+          <div class="cut"></div>
+          <label for="lastname" class="placeholder">body</label>
+        </div>
+        <div class="input-container ic2">
+            <input id="lastname" class="input" placeholder=" "{{form.genere}} />
+            <div class="cut"></div>
+            <label for="lastname" class="placeholder">genere</label>
+          </div>
+        <input type = "submit" value = "submit" class = "submit">
+      
+      <form>
+
+
+
+
+
+
+  </body>
+</html>
