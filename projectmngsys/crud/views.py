@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponseRedirect
 from .forms import EmployeeForm
 from .models import Employee
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def employee_create_view(request):
@@ -14,7 +15,8 @@ def employee_create_view(request):
     context['form'] = form
     
     return render(request,'crud/employee_create.html',context)
-            
+ 
+@login_required           
 def employee_list_view(request):
     context ={}
     employee = Employee.objects.all().values()

@@ -138,3 +138,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRIsPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL = '/crud/list'
+LOGOUT_REDIRECT_URL = '/user/login'
+LOGIN_URL = '/user/login'

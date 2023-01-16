@@ -4,6 +4,7 @@ from .models import User
 from .forms import TeacherSignUpForm
 from django.contrib.auth import login
 from django.shortcuts import redirect
+from django.contrib.auth.views import LoginView,LogoutView
 
 # Create your views here.
 class TeacherSignUpView(CreateView):
@@ -20,5 +21,16 @@ class TeacherSignUpView(CreateView):
         login(self.request, user)
         return redirect('/')
     
-
+class LoginView(LoginView):
     
+    template_name = 'user/login.html'
+    
+    def get(self, request, *args, **kwargs):
+        print(self.request.user)
+        # if self.request.user.is_teacher:
+        #     print('teacher')
+        # else:
+        #     print('student')    
+        return self.render_to_response(self.get_context_data())
+
+

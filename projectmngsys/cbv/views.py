@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView,DeleteView,UpdateView
 from django.views.generic import ListView,DetailView
 from .models import Post
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 #Gnericview ---> django.views.generic
@@ -12,6 +14,8 @@ class CreatePost(CreateView):
     template_name = 'cbv/create.html'
     success_url = '/cbv/list'
 
+# @login_required
+@method_decorator(login_required, name='dispatch')
 class ListAllPost(ListView):
     #context ={}
     model = Post
