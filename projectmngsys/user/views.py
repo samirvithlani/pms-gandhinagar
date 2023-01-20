@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
 from .models import User
-from .forms import TeacherSignUpForm
+from .forms import TeacherSignUpForm,StudentSignUpForm
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView,LogoutView
@@ -21,13 +21,27 @@ class TeacherSignUpView(CreateView):
         login(self.request, user)
         return redirect('/')
     
+class StudentSignUpView(CreateView):
+    model = User
+    form_class = StudentSignUpForm
+    template_name = 'user/signup_form.html'
+    
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'teacher'
+        return super().get_context_data(**kwargs)
+    
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')    
+    
 class LoginView(LoginView):
     
     template_name = 'user/login.html'
     
     def get(self, request, *args, **kwargs):
         print(self.request.user)
-        # if self.request.user.is_teacher:
+        # if self.request.user.is_teacherrr:
         #     print('teacher')
         # else:
         #     print('student')    
