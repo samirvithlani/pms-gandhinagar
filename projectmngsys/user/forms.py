@@ -1,10 +1,11 @@
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User,Student
 from django.db import transaction
 
 class TeacherSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
+        #fields...
     
     @transaction.atomic
     def save(self):

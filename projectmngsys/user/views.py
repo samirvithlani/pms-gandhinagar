@@ -5,7 +5,9 @@ from .forms import TeacherSignUpForm,StudentSignUpForm
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView,LogoutView
-
+from django.conf import settings
+from django.core.mail import send_mail
+from django.http import HttpResponse
 # Create your views here.
 class TeacherSignUpView(CreateView):
     model = User
@@ -46,5 +48,18 @@ class LoginView(LoginView):
         # else:
         #     print('student')    
         return self.render_to_response(self.get_context_data())
+
+#user email -->
+def sendMail(request):
+    subject = 'Welcome to Project Management System'
+    message = 'Thank you for registering with us'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['samir.vithlani83955@gmail.com']
+    res = send_mail(subject, message, email_from, recipient_list)
+    print(res)
+    return HttpResponse('Mail sent successfully')
+    
+    
+        
 
 

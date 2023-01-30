@@ -141,3 +141,10 @@ CRIsPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = '/crud/list'
 LOGOUT_REDIRECT_URL = '/user/login'
 LOGIN_URL = '/user/login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587 # http mail --> 80, https mail --> 465
+EMAIL_HOST_USER = "samir.royal4all@gmail.com"
+EMAIL_HOST_PASSWORD ="crixsycjzjabwwiw"
