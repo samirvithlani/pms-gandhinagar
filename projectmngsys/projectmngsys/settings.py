@@ -128,7 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 STATIC_ROOT = '/static'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
@@ -147,4 +149,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587 # http mail --> 80, https mail --> 465
 EMAIL_HOST_USER = "samir.royal4all@gmail.com"
-EMAIL_HOST_PASSWORD ="crixsycjzjabwwiw"
+EMAIL_HOST_PASSWORD ="kkfbtngtapudusmv"

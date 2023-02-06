@@ -8,6 +8,10 @@ from django.contrib.auth.views import LoginView,LogoutView
 from django.conf import settings
 from django.core.mail import send_mail
 from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
+from .models import Eletronics
+from .forms import ElectronicsForm
+
 # Create your views here.
 class TeacherSignUpView(CreateView):
     model = User
@@ -33,8 +37,14 @@ class StudentSignUpView(CreateView):
         return super().get_context_data(**kwargs)
     
     def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
+        #get email from form valid...
+        email = form.cleaned_data.get('email')
+        print(email)
+        
+        res = sendMail(email)
+        if res>0:
+            user = form.save()
+            login(self.request, user)
         return redirect('/')    
     
 class LoginView(LoginView):
@@ -50,16 +60,33 @@ class LoginView(LoginView):
         return self.render_to_response(self.get_context_data())
 
 #user email -->
-def sendMail(request):
+def sendMail(mailid):
     subject = 'Welcome to Project Management System'
     message = 'Thank you for registering with us'
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['samir.vithlani83955@gmail.com']
+    recipient_list = [mailid]
     res = send_mail(subject, message, email_from, recipient_list)
     print(res)
-    return HttpResponse('Mail sent successfully')
+    return res
     
+
+def upload(request):
+    if request.method == "POST":
+        myfile= request.FILES['file']
+        fs = FileSystemStorage()   
+        myfile = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(myfile)
+        return render(request, 'user/upload.html',{
+            'uploaded_file_url':uploaded_file_url
+        }) 
+    return render(request, 'user/upload.html')    
     
         
-
+class CreateEletronicsWithFile(CreateView):
+    print("CreateEletronicsWithFile")
+    model = Eletronics
+    template_name = 'user/upload.html'
+    fields = '__all__'
+    
+    
 

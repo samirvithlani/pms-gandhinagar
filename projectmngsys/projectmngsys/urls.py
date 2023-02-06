@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from . import views
+from  django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +26,6 @@ urlpatterns = [
     path('cbv/',include('cbv.urls')),
     path('user/',include('user.urls')),
     path('',views.index,name='index')
+    
+    
 ]
