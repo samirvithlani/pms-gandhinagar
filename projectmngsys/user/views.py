@@ -9,8 +9,9 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
-from .models import Eletronics
-from .forms import ElectronicsForm
+from .models import Eletronics,Document
+from .forms import ElectronicsForm,DocumentForm
+from django.views.generic import ListView
 
 # Create your views here.
 class TeacherSignUpView(CreateView):
@@ -86,7 +87,38 @@ class CreateEletronicsWithFile(CreateView):
     print("CreateEletronicsWithFile")
     model = Eletronics
     template_name = 'user/upload.html'
-    fields = '__all__'
+    success_url ="/user/upload/"
+    form_class = ElectronicsForm
+    
+    def form_valid(self, form):
+        file = self.request.FILES['file']
+        print(".........",file)
+        return super().form_valid(form)
+    
+    #size 2 mb
+    #type jpg png    
+ 
+
+class GetEletronics(ListView):
+    model = Eletronics
+    template_name = 'user/eletronics.html'
+    context_object_name = 'eletronics'
+    #get_queryset(self):
+    
+    
+        
+class AddDocument(CreateView):
+    model = Document        
+    template_name = 'user/upload.html'
+    form_class = DocumentForm
+    success_url = '/user/upload/' 
+    
+    
+    
+    def form_valid(self, form):
+        file = self.request.FILES['document']
+        print(".........",file)
+        return super().form_valid(form)
     
     
 

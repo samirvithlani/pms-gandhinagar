@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import User,Student
 from django.db import transaction
 from django import forms
-from .models import Eletronics
+from .models import Eletronics,Document
 
 class TeacherSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -33,5 +33,10 @@ class ElectronicsForm(forms.ModelForm):
     class Meta:
         model = Eletronics
         fields = '__all__'
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ('description', 'document', )        
         
             
